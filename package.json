@@ -1,0 +1,30 @@
+{
+  "name": "emerald-haven",
+  "version": "1.0.0",
+  "description": "e-commerce website",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paul gogo",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.12.0",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^1.41.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^7.0.5",
+    "prisma": "^6.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
