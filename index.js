@@ -8,6 +8,7 @@ import { v2 as cloudinary } from 'cloudinary';
 
 dotenv.config();
 
+// ✅ Cloudinary config
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -16,21 +17,33 @@ cloudinary.config({
 
 const app = express();
 
+// ✅ Allow both local and Vercel frontend
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://emerald-chi-ashen.vercel.app'
+];
+
+// ✅ CORS config with credentials and preflight fix
 app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
+  origin: allowedOrigins,
+  credentials: true,
+  optionsSuccessStatus: 200
 }));
 
 app.use(cookieParser());
 app.use(express.json());
 
-// Mount auth and property routes
-app.use('/api/v1/auth', authRoutes); // e.g., /api/v1/auth/register
-app.use('/api/v1/properties', propertyRoutes); // ✅ now routes start at /api/v1/properties
-
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+// ✅ Health check route
+app.get('/', (req, res) => {
+  res.send('✅ Emerald Haven API is running');
 });
 
+// ✅ Main API routes
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/properties', propertyRoutes);
 
+// ✅ Start server
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});

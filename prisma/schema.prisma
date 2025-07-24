@@ -9,16 +9,16 @@ datasource db {
 }
 
 model user {
-  id                            String   @id @default(cuid())
-  name                          String
-  email                         String   @unique
-  password                      String
-  isVerified                    Boolean  @default(false)
-  emailVerificationToken        String?
-  emailVerificationTokenExpiresAt DateTime?
-  passwordResetToken            String?
-  passwordResetTokenExpiresAt   DateTime?
-  properties                    Property[]
+  id                                    String   @id @default(cuid())
+  name                                  String
+  email                                 String   @unique
+  password                              String
+  isVerified                            Boolean  @default(false)
+  emailVerificationToken                String?
+  emailVerificationTokenExpiresAt       DateTime?
+  passwordResetToken                    String?
+  passwordResetTokenExpiresAt           DateTime?
+  properties                            Property[]
 }
 
 model Property {
