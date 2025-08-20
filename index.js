@@ -20,7 +20,8 @@ const app = express();
 // ✅ Allow both local and Vercel frontend
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://emerald-chi-ashen.vercel.app'
+  'https://emerald-chi-ashen.vercel.app',
+  'https://animated-kitten-fdf2cd.netlify.app/'
 ];
 
 // ✅ CORS config with credentials and preflight fix
