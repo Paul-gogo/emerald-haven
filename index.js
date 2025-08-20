@@ -17,18 +17,32 @@ cloudinary.config({
 
 const app = express();
 
-// ✅ Allow both local and Vercel frontend
+// ✅ Allowed origins
 const allowedOrigins = [
   'http://localhost:3000',
   'https://emerald-chi-ashen.vercel.app',
-  'https://animated-kitten-fdf2cd.netlify.app/'
+  'https://animated-kitten-fdf2cd.netlify.app'
 ];
 
-// ✅ CORS config with credentials and preflight fix
+// ✅ CORS config
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function(origin, callback){
+    // allow requests with no origin (like Postman)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true,
   optionsSuccessStatus: 200
+}));
+
+// ✅ Handle preflight OPTIONS requests
+app.options('*', cors({
+  origin: allowedOrigins,
+  credentials: true
 }));
 
 app.use(cookieParser());
@@ -39,7 +53,7 @@ app.get('/', (req, res) => {
   res.send('✅ Emerald Haven API is running');
 });
 
-// ✅ Main API routes
+// ✅ API routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/properties', propertyRoutes);
 
